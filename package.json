@@ -1,0 +1,14 @@
+{
+  "name": "cap-table",
+  "version": "1.0.0",
+  "description": "Startup cap table generator with vesting and share classes",
+  "main": "generate-cap-table.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node index.js"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+}
