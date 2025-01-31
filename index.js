@@ -1,6 +1,26 @@
 // Enhanced Cap Table Template with Vesting and Share Classes
 import XLSX from 'xlsx';
 
+/**
+ * Creates an enhanced capitalization (cap) table workbook with detailed financial and equity information.
+ * 
+ * @returns {Object} A workbook containing three worksheets:
+ *  - 'Cap Table': Comprehensive breakdown of share ownership, vesting, and investment details
+ *  - 'Share Classes': Summary of different share classes and their characteristics
+ *  - 'Vesting Summary': Detailed tracking of individual shareholder vesting schedules
+ * 
+ * @description
+ * Generates a multi-sheet Excel workbook that provides a comprehensive view of a company's equity structure.
+ * The workbook includes:
+ *  - Detailed shareholder information
+ *  - Share class breakdowns
+ *  - Vesting schedules for founders, employees, and option pool
+ *  - Calculated ownership percentages and investment amounts
+ * 
+ * @example
+ * const capTableWorkbook = createEnhancedCapTable();
+ * XLSX.writeFile(capTableWorkbook, 'enhanced_cap_table.xlsx');
+ */
 function createEnhancedCapTable() {
     const wb = XLSX.utils.book_new();
     
@@ -107,19 +127,61 @@ function createEnhancedCapTable() {
     return wb;
 }
 
-// Custom functions for vesting calculations
+/**
+ * Calculates the number of vested shares based on total shares, vesting start date, and vesting schedule.
+ * 
+ * @param {number} totalShares - The total number of shares subject to vesting.
+ * @param {Date} startDate - The date when the vesting schedule begins.
+ * @param {string} schedule - The vesting schedule type (e.g., 'quarterly', 'cliff').
+ * @returns {number} The number of shares that have vested, currently a placeholder returning 25% of total shares.
+ * @description
+ * This is a placeholder implementation that returns a fixed 25% of total shares.
+ * In a production environment, this function would dynamically calculate vested shares
+ * based on the current date, start date, and specific vesting schedule.
+ */
 function VESTED_SHARES(totalShares, startDate, schedule) {
     // This would normally calculate vested shares based on the current date
     // For demonstration, returning 25% of total shares
     return totalShares * 0.25;
 }
 
+/**
+ * Calculates the next vesting date based on a given start date and vesting schedule.
+ * 
+ * @param {Date} startDate - The initial date when vesting begins.
+ * @param {string} [schedule='quarterly'] - The vesting schedule type (e.g., 'quarterly', 'annual').
+ * @returns {Date} The next date when additional shares will vest.
+ * @description
+ * This is a placeholder implementation that returns a date 90 days after the start date.
+ * In a production environment, this would be replaced with a more sophisticated calculation
+ * that considers the specific vesting schedule and current date.
+ */
 function NEXT_VESTING_DATE(startDate, schedule) {
     // This would normally calculate the next vesting date
     // For demonstration, returning a placeholder date
     return new Date(startDate.getTime() + (90 * 24 * 60 * 60 * 1000));
 }
 
+/**
+ * Calculates the next vesting amount for a given number of total shares.
+ * 
+ * @param {number} totalShares - The total number of shares subject to vesting.
+ * @param {string} [schedule='quarterly'] - The vesting schedule type (default is quarterly).
+ * @returns {number} The amount of shares that will vest in the next vesting period.
+ * @description
+ * This function provides a simplified calculation of the next vesting amount, 
+ * assuming a standard quarterly vesting schedule where shares vest in equal 
+ * increments over time. For demonstration purposes, it returns 1/16th of the 
+ * total shares, representing a typical 4-year vesting period with quarterly 
+ * vest intervals.
+ * 
+ * @example
+ * // Returns 625 (assuming 10,000 total shares)
+ * const nextVest = NEXT_VESTING_AMOUNT(10000);
+ * 
+ * @note This is a placeholder implementation and should be replaced with 
+ * more sophisticated vesting calculation logic in a production environment.
+ */
 function NEXT_VESTING_AMOUNT(totalShares, schedule) {
     // This would normally calculate the next vesting amount
     // For demonstration, returning 1/16th of total shares (quarterly vesting)
