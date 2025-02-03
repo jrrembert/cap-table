@@ -96,7 +96,9 @@ function createEnhancedCapTable() {
         ['=\'Cap Table\'!C2', '=\'Cap Table\'!D2', '=\'Cap Table\'!H2', '=\'Cap Table\'!I2', 
          vestingCalculations['Founder 1'].vested,
          '=B2-E2',
-         vestingCalculations['Founder 1'].nextDate.toISOString(),
+         (vestingCalculations['Founder 1'].nextDate
+           ? vestingCalculations['Founder 1'].nextDate.toISOString()
+           : ""),
          vestingCalculations['Founder 1'].nextAmount],
         ['=\'Cap Table\'!C3', '=\'Cap Table\'!D3', '=\'Cap Table\'!H3', '=\'Cap Table\'!I3', 
          vestingCalculations['Founder 2'].vested,
