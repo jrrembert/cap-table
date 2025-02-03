@@ -288,17 +288,21 @@ function get_next_vesting_date(startDate, schedule = 'quarterly') {
  * more sophisticated vesting calculation logic in a production environment.
  */
 function get_next_vesting_amount(totalShares, schedule = 'quarterly') {
-    if (!totalShares || isNaN(totalShares)) {
+    if (!totalShares || Number.isNaN(totalShares)) {
         throw new Error('Invalid total shares amount');
     }
 
     const [duration] = parseSchedule(schedule);
     const quartersTotal = Math.floor(duration / 3);
+    if (quartersTotal <= 0) {
+        return 0;
+    }
     
     // Standard quarterly vesting amount (after cliff)
     const quarterlyAmount = Math.floor(totalShares / quartersTotal);
     
     return quarterlyAmount;
+}
 }
 
 // Export to file
